@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Currencies.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220405060515_InitialCreate")]
+    [Migration("20220405061512_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
