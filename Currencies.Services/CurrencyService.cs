@@ -1,4 +1,5 @@
 ﻿using Currencies.Common;
+using Currencies.Data.Context;
 using Currencies.Models.Currency;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -21,11 +22,13 @@ namespace Currencies.Services
     {
         private readonly ExchangeService exchangeService;
         private readonly IMemoryCache _memoryCache;
+        private readonly DataContext context;
 
-        public CurrencyService(ExchangeService exchangeService, IMemoryCache memoryCache)
+        public CurrencyService(ExchangeService exchangeService, IMemoryCache memoryCache, DataContext context)
         {
             this.exchangeService = exchangeService;
             this._memoryCache = memoryCache;
+            this.context = context;
         }
 
         public async Task<List<Symbol>> GetAvailableCurrencies()
@@ -133,10 +136,22 @@ namespace Currencies.Services
                 }).ToList();
 
                 CacheExtensions.Set(_memoryCache, Constants.CacheKeys.RATES, convertedRates, TimeSpan.FromMinutes(Constants.CACHE_MINUTES));
-
+                SaveRatesToDatabase(baseCurrnecy, convertedRates);
                 return convertedRates;
             }
             return cacheValue;
+        }
+
+        private void SaveRatesToDatabase(string currency, List<Rate> rates) {
+            var mappedRates = Mapping.Mapper.Map<List<Data.Entities.Rate>>(rates);
+            context.CurrencyRates.Add(
+                    new Data.Entities.CurrencyRate { 
+                        BaseCurrency = currency,
+                        Time = DateTime.UtcNow,
+                        Rates = mappedRates
+                    }
+                );
+            context.SaveChanges();
         }
     }
 }
