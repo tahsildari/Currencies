@@ -20,22 +20,22 @@ namespace Currencies.Services
     public class CurrencyService : ICurrencyService
     // : ICurrencyService
     {
-        private readonly ExchangeService exchangeService;
+        private readonly ExchangeService _exchangeService;
         private readonly IMemoryCache _memoryCache;
-        private readonly DataContext context;
+        private readonly DataContext _context;
 
         public CurrencyService(ExchangeService exchangeService, IMemoryCache memoryCache, DataContext context)
         {
-            this.exchangeService = exchangeService;
+            this._exchangeService = exchangeService;
             this._memoryCache = memoryCache;
-            this.context = context;
+            this._context = context;
         }
 
         public async Task<List<Symbol>> GetAvailableCurrencies()
         {
             if (!_memoryCache.TryGetValue(Constants.CacheKeys.CURRENCIES, out dynamic cacheValue))
             {
-                var response = await exchangeService.GetSupportedCurrencies();
+                var response = await _exchangeService.GetSupportedCurrencies();
 
                 if (!response.IsSuccess)
                     return null;
@@ -81,7 +81,7 @@ namespace Currencies.Services
             var date = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd");
             if (!_memoryCache.TryGetValue($"{Constants.CacheKeys.HISTORIES}@{date}", out dynamic cacheValue))
             {
-                var response = await exchangeService.GetHistoricalRates(date);
+                var response = await _exchangeService.GetHistoricalRates(date);
 
                 if (!response.IsSuccess)
                     return null;
@@ -113,7 +113,7 @@ namespace Currencies.Services
         {
             if (!_memoryCache.TryGetValue(Constants.CacheKeys.RATES, out dynamic cacheValue))
             {
-                var response = await exchangeService.GetCurrentRates(baseCurrnecy);
+                var response = await _exchangeService.GetCurrentRates(baseCurrnecy);
 
                 if (!response.IsSuccess)
                     return null;
@@ -144,14 +144,14 @@ namespace Currencies.Services
 
         private void SaveRatesToDatabase(string currency, List<Rate> rates) {
             var mappedRates = Mapping.Mapper.Map<List<Data.Entities.Rate>>(rates);
-            context.CurrencyRates.Add(
+            _context.CurrencyRates.Add(
                     new Data.Entities.CurrencyRate { 
                         BaseCurrency = currency,
                         Time = DateTime.UtcNow,
                         Rates = mappedRates
                     }
                 );
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }
