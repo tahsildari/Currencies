@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Currencies.Data\Currencies.Data.csproj" />
+    <ProjectReference Include="..\Currencies.Models\Currencies.Models.csproj" />
+    <ProjectReference Include="..\Currencies.Services\Currencies.Services.csproj" />
   </ItemGroup>
 
 

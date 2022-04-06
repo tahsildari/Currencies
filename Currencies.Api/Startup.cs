@@ -1,11 +1,12 @@
 using Currencies.Data.Context;
+using Currencies.Models;
+using Currencies.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using RestSharp;
 
 namespace Currencies.Api
 {
@@ -24,6 +25,16 @@ namespace Currencies.Api
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddDbContext<DataContext>();
+
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            var exchangeRatesApiSection = Configuration.GetSection("ExchangeSettings");
+            services.Configure<ExchangeSettings>(exchangeRatesApiSection);
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<CurrencyService, CurrencyService>();
+            services.AddScoped<ExchangeService, ExchangeService>();
+            services.AddScoped<IRestClient, RestClient>();
+            services.AddScoped<IRestRequest, RestRequest>();
             //    options =>
             //{
             //    options.UseSqlServer(

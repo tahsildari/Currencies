@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Currencies.Api.Models
+namespace Currencies.Models
 {
     public class AuthenticateRequest
     {

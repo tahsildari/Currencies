@@ -1,0 +1,3 @@
+﻿1. Change to the solution directory
+2. dotnet ef migrations add InitialCreate --project Currencies.Data --startup-project Currencies.Api
+3. dotnet ef database update --project Currencies.Data --startup-project Currencies.Api

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Api", "Currencie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Data", "Currencies.Data\Currencies.Data.csproj", "{99DCFB59-827D-4AFE-8FAB-8B946D46DAD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Services", "Currencies.Services\Currencies.Services.csproj", "{AD32F9FF-695F-48FD-8C29-C597A415BB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Models", "Currencies.Models\Currencies.Models.csproj", "{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{99DCFB59-827D-4AFE-8FAB-8B946D46DAD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DCFB59-827D-4AFE-8FAB-8B946D46DAD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DCFB59-827D-4AFE-8FAB-8B946D46DAD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD32F9FF-695F-48FD-8C29-C597A415BB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD32F9FF-695F-48FD-8C29-C597A415BB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD32F9FF-695F-48FD-8C29-C597A415BB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD32F9FF-695F-48FD-8C29-C597A415BB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

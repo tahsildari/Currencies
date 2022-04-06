@@ -1,7 +1,7 @@
 using Currencies.Data.Entities;
 using System.Text.Json.Serialization;
 
-namespace Currencies.Api.Models
+namespace Currencies.Models
 {
     public class AuthenticateResponse
     {
