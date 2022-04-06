@@ -1,4 +1,5 @@
-﻿using Currencies.Services;
+﻿using Currencies.Models.Currency;
+using Currencies.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -39,18 +40,14 @@ namespace Currencies.Api.Controllers
             return Ok(currencies);
         }
 
-        //[HttpPost]
-        //[Route("")]
-        //public async Task<IActionResult> Convert([FromBody] ConversionInstruction conversionInfo)
-        //{
-        //    var currencies = await _currencyService.Convert(conversionInfo);
-        //    return Ok(currencies);
-        //}
-
-        public class ConversionInstruction {
-            public decimal Value { get; set; }
-            public string FromCurrency { get; set; }
-            public string ToCurrency { get; set; }
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> Convert([FromBody] ConversionInstruction conversionInfo)
+        {
+            var currencies = await _currencyService.Convert(conversionInfo);
+            return Ok(currencies);
         }
+
+        
     }
 }

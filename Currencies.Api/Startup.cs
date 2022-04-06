@@ -3,6 +3,7 @@ using Currencies.Models;
 using Currencies.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +32,7 @@ namespace Currencies.Api
             var exchangeRatesApiSection = Configuration.GetSection("ExchangeSettings");
             services.Configure<ExchangeSettings>(exchangeRatesApiSection);
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IMemoryCache, MemoryCache>();
             services.AddScoped<CurrencyService, CurrencyService>();
             services.AddScoped<ExchangeService, ExchangeService>();
             services.AddScoped<IRestClient, RestClient>();
