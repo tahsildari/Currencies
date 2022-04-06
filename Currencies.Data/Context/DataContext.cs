@@ -1,4 +1,5 @@
 ﻿using Currencies.Data.Entities;
+using Currencies.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -26,7 +27,8 @@ namespace Currencies.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<>
+
+            modelBuilder.Seed();
         }
     }
 }
