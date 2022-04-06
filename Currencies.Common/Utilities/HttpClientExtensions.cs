@@ -3,7 +3,7 @@ using RestSharp;
 using System;
 using System.Threading.Tasks;
 
-namespace Currencies.Services.Utilities
+namespace Currencies.Common.Utilities
 {
     public static class HttpClientExtensions
     {

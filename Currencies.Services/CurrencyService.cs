@@ -1,4 +1,5 @@
-﻿using Currencies.Models.Currency;
+﻿using Currencies.Common;
+using Currencies.Models.Currency;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json.Linq;
 using System;
@@ -51,7 +52,7 @@ namespace Currencies.Services
                         Name = kvp.Value.ToString()
                     };
                 }).ToList();
-                CacheExtensions.Set(_memoryCache, Constants.CacheKeys.CURRENCIES, convertedSymbols, TimeSpan.FromMinutes(Constants.CACHEMINUTES));
+                CacheExtensions.Set(_memoryCache, Constants.CacheKeys.CURRENCIES, convertedSymbols, TimeSpan.FromMinutes(Constants.CACHE_MINUTES));
 
                 return convertedSymbols;
             }
@@ -99,7 +100,7 @@ namespace Currencies.Services
                     };
                 }).ToList();
 
-                CacheExtensions.Set(_memoryCache, $"{Constants.CacheKeys.HISTORIES}@{date}", convertedRates, TimeSpan.FromMinutes(Constants.CACHEMINUTES));
+                CacheExtensions.Set(_memoryCache, $"{Constants.CacheKeys.HISTORIES}@{date}", convertedRates, TimeSpan.FromMinutes(Constants.CACHE_MINUTES));
 
                 return convertedRates;
             }
@@ -132,7 +133,7 @@ namespace Currencies.Services
                     };
                 }).ToList();
 
-                CacheExtensions.Set(_memoryCache, Constants.CacheKeys.RATES, convertedRates, TimeSpan.FromMinutes(Constants.CACHEMINUTES));
+                CacheExtensions.Set(_memoryCache, Constants.CacheKeys.RATES, convertedRates, TimeSpan.FromMinutes(Constants.CACHE_MINUTES));
 
                 return convertedRates;
             }

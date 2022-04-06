@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Api", "Currencies.Api\Currencies.Api.csproj", "{2A168B01-7B76-48F7-AF8F-6F1179BCF89C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currencies.Api", "Currencies.Api\Currencies.Api.csproj", "{2A168B01-7B76-48F7-AF8F-6F1179BCF89C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Data", "Currencies.Data\Currencies.Data.csproj", "{99DCFB59-827D-4AFE-8FAB-8B946D46DAD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currencies.Data", "Currencies.Data\Currencies.Data.csproj", "{99DCFB59-827D-4AFE-8FAB-8B946D46DAD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Services", "Currencies.Services\Currencies.Services.csproj", "{AD32F9FF-695F-48FD-8C29-C597A415BB77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currencies.Services", "Currencies.Services\Currencies.Services.csproj", "{AD32F9FF-695F-48FD-8C29-C597A415BB77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Models", "Currencies.Models\Currencies.Models.csproj", "{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currencies.Models", "Currencies.Models\Currencies.Models.csproj", "{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currencies.Common", "Currencies.Common\Currencies.Common.csproj", "{41F1DC20-E10F-4BE9-8A3B-1B6FEA30D670}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B4D26A3-E0BB-4DB6-808D-6DA61511FE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41F1DC20-E10F-4BE9-8A3B-1B6FEA30D670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41F1DC20-E10F-4BE9-8A3B-1B6FEA30D670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41F1DC20-E10F-4BE9-8A3B-1B6FEA30D670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41F1DC20-E10F-4BE9-8A3B-1B6FEA30D670}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

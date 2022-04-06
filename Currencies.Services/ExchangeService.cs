@@ -1,8 +1,8 @@
-﻿using Currencies.Models;
-using Currencies.Services.Utilities;
+﻿using Currencies.Common;
+using Currencies.Common.Utilities;
+using Currencies.Models;
 using Microsoft.Extensions.Options;
 using RestSharp;
-using System;
 using System.Threading.Tasks;
 
 namespace Currencies.Services
@@ -33,11 +33,11 @@ namespace Currencies.Services
         {
             var ex = _exchangeSettings;
             _currenciesUrl = (ex.ApiBaseAddress + ex.CurrenciesEndpoint)
-                .Replace(Constants.APIKEY, ex.AccessKey);
+                .Replace(Constants.API_KEY, ex.AccessKey);
             _currencyUrl = (ex.ApiBaseAddress + ex.CurrencyEndpoint)
-                .Replace(Constants.APIKEY, ex.AccessKey);
+                .Replace(Constants.API_KEY, ex.AccessKey);
             _historyUrl = (ex.ApiBaseAddress + ex.HistoryEndpoint)
-                .Replace(Constants.APIKEY, ex.AccessKey);
+                .Replace(Constants.API_KEY, ex.AccessKey);
         }
 
         internal async Task<ApiResult<object>> GetCurrentRates(string baseCurrnecy)
