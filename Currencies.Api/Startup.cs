@@ -1,3 +1,4 @@
+using Currencies.Api.Middleware;
 using Currencies.Data.Context;
 using Currencies.Models;
 using Currencies.Services;
@@ -35,19 +36,8 @@ namespace Currencies.Api
             services.AddSingleton<IMemoryCache, MemoryCache>();
             services.AddScoped<CurrencyService, CurrencyService>();
             services.AddScoped<ExchangeService, ExchangeService>();
-            services.AddScoped<IRestClient, RestClient>();
+            services.AddScoped<IRestClient, RestClient>(); //make signleton
             services.AddScoped<IRestRequest, RestRequest>();
-            //    options =>
-            //{
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection"),
-            //        serverDbContextOptionsBuilder =>
-            //        {
-            //            var minutes = (int)TimeSpan.FromMinutes(60).TotalSeconds;
-            //            serverDbContextOptionsBuilder.CommandTimeout(minutes);
-            //            serverDbContextOptionsBuilder.EnableRetryOnFailure();
-            //        });
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +59,8 @@ namespace Currencies.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

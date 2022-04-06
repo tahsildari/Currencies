@@ -1,10 +1,12 @@
-﻿using Currencies.Models.Currency;
+﻿using Currencies.Api.Attributes;
+using Currencies.Models.Currency;
 using Currencies.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Currencies.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/currencies")]
     public class CurrencyController : ControllerBase
@@ -48,6 +50,6 @@ namespace Currencies.Api.Controllers
             return Ok(currencies);
         }
 
-        
+
     }
 }

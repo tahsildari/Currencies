@@ -39,7 +39,8 @@ namespace Currencies.Services
                     return null;
 
                 Dictionary<string, object> symbols = jObject["symbols"];
-                var convertedSymbols = symbols.Select(kvp => {
+                var convertedSymbols = symbols.Select(kvp =>
+                {
                     return new Symbol
                     {
                         Key = kvp.Key,
@@ -70,9 +71,9 @@ namespace Currencies.Services
 
         public async Task<List<Rate>> GetHistoricalRates(int days)
         {
-            if (!_memoryCache.TryGetValue(Constants.CacheKeys.HISTORIES, out dynamic cacheValue))
+            var date = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd");
+            if (!_memoryCache.TryGetValue($"{Constants.CacheKeys.HISTORIES}@{date}", out dynamic cacheValue))
             {
-                var date = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd");
                 var response = await exchangeService.GetHistoricalRates(date);
 
                 if (!response.IsSuccess)
@@ -85,7 +86,8 @@ namespace Currencies.Services
 
 
                 Dictionary<string, object> rates = jObject["rates"];
-                var convertedRates = rates.Select(kvp => {
+                var convertedRates = rates.Select(kvp =>
+                {
                     return new Rate
                     {
                         Symbol = kvp.Key,
@@ -93,7 +95,7 @@ namespace Currencies.Services
                     };
                 }).ToList();
 
-                CacheExtensions.Set(_memoryCache, Constants.CacheKeys.HISTORIES, convertedRates, TimeSpan.FromMinutes(Constants.CACHEMINUTES));
+                CacheExtensions.Set(_memoryCache, $"{Constants.CacheKeys.HISTORIES}@{date}", convertedRates, TimeSpan.FromMinutes(Constants.CACHEMINUTES));
 
                 return convertedRates;
             }
@@ -117,7 +119,8 @@ namespace Currencies.Services
 
                 Dictionary<string, object> rates = jObject["rates"];
 
-                var convertedRates = rates.Select(kvp=> {
+                var convertedRates = rates.Select(kvp =>
+                {
                     return new Rate
                     {
                         Symbol = kvp.Key,
