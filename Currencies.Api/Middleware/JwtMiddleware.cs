@@ -1,14 +1,7 @@
-﻿using Currencies.Data.Context;
-using Currencies.Models;
-using Currencies.Services;
+﻿using Currencies.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Currencies.Api.Middleware

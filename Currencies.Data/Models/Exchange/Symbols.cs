@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Currencies.Data.Models.Exchange
+﻿namespace Currencies.Data.Models.Exchange
 {
     public class Symbols
     {

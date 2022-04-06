@@ -1,7 +1,6 @@
 ﻿using Currencies.Common;
 using Currencies.Models.Currency;
 using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

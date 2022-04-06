@@ -1,6 +1,5 @@
 ﻿using Currencies.Common;
 using FluentValidation;
-using System;
 
 namespace Currencies.Api.Validation
 {

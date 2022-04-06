@@ -1,7 +1,6 @@
 ﻿using Currencies.Data.Entities;
 using Currencies.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Currencies.Data.Context
 {
