@@ -1,5 +1,6 @@
 ﻿using Currencies.Data.Context;
 using Currencies.Models;
+using Currencies.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -15,54 +16,34 @@ namespace Currencies.Api.Middleware
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly AppSettings _appSettings;
+        private readonly IUserService _userService;
 
-        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
+        public JwtMiddleware(RequestDelegate next, IUserService userService)
         {
             _next = next;
-            _appSettings = appSettings.Value;
+            _userService = userService;
         }
 
-        public async Task Invoke(HttpContext context, DataContext dataContext)
+        public async Task Invoke(HttpContext context)
         {
             var token = context.Request.Cookies["refreshToken"];
-            //.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                await attachAccountToContext(context, dataContext, token);
+                await attachAccountToContext(context, token);
 
             await _next(context);
         }
 
-        private async Task attachAccountToContext(HttpContext context, DataContext dataContext, string token)
+        private async Task attachAccountToContext(HttpContext context, string token)
         {
             try
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-                //tokenHandler.ValidateToken(token, new TokenValidationParameters
-                //{
-                //    ValidateIssuerSigningKey = true,
-                //    IssuerSigningKey = new SymmetricSecurityKey(key),
-                //    ValidateIssuer = false,
-                //    ValidateAudience = false,
-                //    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                //    ClockSkew = TimeSpan.Zero
-                //}, out SecurityToken validatedToken);
-
-                var jwtToken = context.Request.Cookies["refreshToken"];
-                //(JwtSecurityToken)validatedToken;
-                //var accountId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
-
-                // attach account to context on successful jwt validation
-                var user = dataContext.Users.FirstOrDefault(u =>
-                    u.RefreshTokens.Any(t => t.Token == jwtToken)); /*&& t.Expires > DateTime.Now*/
+                var user = _userService.GetByToken(token);
 
                 if (user?.RefreshTokens?.Any(t => t.IsActive) ?? false)
                     context.Items["Account"] = user;
                 else
                     context.Items["Account"] = null;
-                //.FindAsync(accountId);
             }
             catch (Exception x)
             {

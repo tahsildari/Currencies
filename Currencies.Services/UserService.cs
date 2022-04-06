@@ -20,6 +20,8 @@ namespace Currencies.Services
         bool RevokeToken(string token, string ipAddress);
         IEnumerable<User> GetAll();
         User GetById(int id);
+
+        User GetByToken(string token);
     }
 
     public class UserService : IUserService
@@ -110,6 +112,12 @@ namespace Currencies.Services
         public User GetById(int id)
         {
             return _context.Users.Find(id);
+        }
+
+        public User GetByToken(string token)
+        {
+            return _context.Users.FirstOrDefault(u =>
+                     u.RefreshTokens.Any(t => t.Token == token));
         }
 
         // helper methods
