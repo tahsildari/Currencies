@@ -13,15 +13,6 @@ namespace Currencies.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                    //Configuration.GetConnectionString("DefaultConnection"),
-                    "server=.; database=Currencies;Trusted_Connection=True;",
-                    serverDbContextOptionsBuilder =>
-                    {
-                        var minutes = (int)TimeSpan.FromMinutes(60).TotalSeconds;
-                        serverDbContextOptionsBuilder.CommandTimeout(minutes);
-                        serverDbContextOptionsBuilder.EnableRetryOnFailure();
-                    });
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

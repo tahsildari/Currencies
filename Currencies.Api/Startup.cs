@@ -4,11 +4,13 @@ using Currencies.Models;
 using Currencies.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RestSharp;
+using System;
 
 namespace Currencies.Api
 {
@@ -26,15 +28,23 @@ namespace Currencies.Api
         {
             services.AddControllers();
             services.AddSwaggerGen();
-            services.AddDbContext<DataContext>();
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    serverDbContextOptionsBuilder =>
+                    {
+                        var minutes = (int)TimeSpan.FromMinutes(60).TotalSeconds;
+                        serverDbContextOptionsBuilder.CommandTimeout(minutes);
+                        serverDbContextOptionsBuilder.EnableRetryOnFailure();
+                    })
+            );
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             var exchangeRatesApiSection = Configuration.GetSection("ExchangeSettings");
             services.Configure<ExchangeSettings>(exchangeRatesApiSection);
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddSingleton<IMemoryCache, MemoryCache>();
-            services.AddScoped<CurrencyService, CurrencyService>();
             services.AddScoped<ExchangeService, ExchangeService>();
             services.AddScoped<IRestClient, RestClient>(); //make signleton
             services.AddScoped<IRestRequest, RestRequest>();

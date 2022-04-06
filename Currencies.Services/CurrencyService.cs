@@ -10,10 +10,14 @@ namespace Currencies.Services
 {
     public interface ICurrencyService
     {
-        Task<Dictionary<string, object>> GetAvailableCurrencies();
-        Task GetCurrentRates(string baseCurrnecy);
+        Task<ConversionResult> Convert(ConversionInstruction conversionInfo);
+        Task<List<Symbol>> GetAvailableCurrencies();
+        Task<List<Rate>> GetCurrentRates(string baseCurrnecy);
+        Task<List<Rate>> GetHistoricalRates(int days);
     }
-    public class CurrencyService// : ICurrencyService
+
+    public class CurrencyService : ICurrencyService
+    // : ICurrencyService
     {
         private readonly ExchangeService exchangeService;
         private readonly IMemoryCache _memoryCache;

@@ -11,9 +11,9 @@ namespace Currencies.Api.Controllers
     [Route("api/currencies")]
     public class CurrencyController : ControllerBase
     {
-        private readonly CurrencyService _currencyService;
+        private readonly ICurrencyService _currencyService;
 
-        public CurrencyController(CurrencyService currencyService)
+        public CurrencyController(ICurrencyService currencyService)
         {
             _currencyService = currencyService;
         }
