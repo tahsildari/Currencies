@@ -16,29 +16,27 @@ namespace Currencies.Api.Middleware
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IUserService _userService;
 
-        public JwtMiddleware(RequestDelegate next, IUserService userService)
+        public JwtMiddleware(RequestDelegate next)
         {
             _next = next;
-            _userService = userService;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context, IUserService userService)
         {
             var token = context.Request.Cookies["refreshToken"];
 
             if (token != null)
-                await attachAccountToContext(context, token);
+                await attachAccountToContext(context, token, userService);
 
             await _next(context);
         }
 
-        private async Task attachAccountToContext(HttpContext context, string token)
+        private async Task attachAccountToContext(HttpContext context, string token, IUserService userService)
         {
             try
             {
-                var user = _userService.GetByToken(token);
+                var user = userService.GetByToken(token);
 
                 if (user?.RefreshTokens?.Any(t => t.IsActive) ?? false)
                     context.Items["Account"] = user;
